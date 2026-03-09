@@ -1,133 +1,133 @@
 Неполное описание и листинг разработанной программы «Силомер»
 Первое что было создано изначально — это главное рабочее окно. Обычно оно создается автоматически, чтобы было с чем работать, но дальнейшая работа в нем требует доработки в виде кода. Приложение будет однооконным со множеством рабочих страниц, для этого понадобится «ContentControl» и небольшая настройка стиля.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image1.png
 ![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image1.png?raw=true)
+
 Изображение 1. Код главного окна
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image2.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image2.png?raw=true)
 
 Изображение 2. Код настройки стиля «MyWindow»
 
 Внутри главное окно выглядит иначе, здесь используется метод «SingleTon» (наш объект единственный и легкодоступен для каких-либо действий) для удобной работы с главным окном из любой части скрипта. В коде главного окна прописаны методы ChangeTitle (для смены заголовка приложения) и MainWindow_Closed (действие при закрытие окна). Также при первом открытии окна происходят действия: Instance = this (создание доступной ссылки на наше окно), StartWindow и OpenUC, которые вызываются через отдельный скрипт «WindowController».
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image3.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image3.png?raw=true)
 
 Изображение 3. Внутренний код главного окна
 
 Для реализации самой задумки приложения, было принято решение использовать «UserControl» как аналог страницам приложения и некоторой оптимизации действий.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image4.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image4.png?raw=true)
 
 Изображение 4. Пример применения одного из элементов «UserControl»
 
 Первые задачи, которые стояли на пути разработки приложения — это реализовать открытие нужных пользователю страниц и возвращение на предыдущую страницу. Так как по задумке это обычное оконное управление, был написан класс «WindowController» в котором уже были созданы методы для управления перехода между страницами.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image5.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image5.png?raw=true)
 
 Изображение 5. Небольшая часть скриптов из класса «WindowController»
 
 Так как элементы «Window» имеют разные размеры в редакторе и при работе, был написан вызов (команда) «StartWindow», который стоит использовать только при первом открытии окна, чтобы компенсировать недостающие размеры окна и дальнейших удобств в отладке приложения. Вызов «OpenUC» выполняет действие открытия элемента «UserControl» внутри главного окна и заносит его в список элементов «ListUC» для дальнейшей реализации переключения между страницами. Вызов «BackUC» выполняет действие возврата на предыдущую страницу, используя ранее упомянутый список элементов «ListUC» и обновляя данный список. Вызов «ChangeTitle» используется для смены заголовка приложения при смене рабочей страницы, он конвертирует «UserControl» в «IUC» по возможности и получает данные «IUC.Title» для дальнейшей смены заголовка приложения в главном окне. «IUC» является интерфейсом для некоторых элементов, поэтому если «IUC» не был присвоен элементу «UserControl», то смена заголовка в главном окне не происходит.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image6.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image6.png?raw=true)
 
 Изображение 6. Интерфейс «IUC»
 
 После создания страницы с приветствием, далее была создана навигационная страница между разделами, которые содержат в себе самые различные калькуляторы со своими логикой и алгоритмами решения задач.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image7.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image7.png?raw=true)
 
 Изображение 7. Навигационная страница «MenuUC»
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image8.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image8.png?raw=true)
 
 Изображение 8. Код интерфейса «MenuUC»
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image9.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image9.png?raw=true)
 
 Изображение 9. Внутренний код «MenuUC»
 
 Также стоит упомянуть о том, что для более удобного получения ссылки на нужную страницу, был написал отдельный класс «UCNavigator», он хранит в себе множество ссылок на сами страницы.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image10.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image10.png?raw=true)
 
 Изображение 10. Ссылки на некоторые страницы через «UCNavigator»
 
 Если описывать сами страницы с калькуляторами, то в пример возьмем раздел «Гидростатика». Раздел содержит в себе не так много кодовой части, следовательно рассмотреть его можно более ясно. В его навигационной странице всего две кнопки: калькулятор и кнопка «Назад» (для возврата на прошлую страницу).
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image11.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image11.png?raw=true)
 
 Изображение 11. Страница раздела «Гидростатика»
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image12.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image12.png?raw=true)
 
 Изображение 12. Код интерфейса страницы «Гидростатика»
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image13.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image13.png?raw=true)
 
 Изображение 13. Внутренний код страницы «Гидростатика»
 
 Внутренние коды навигационных окон почти ничем не отличаются друг от друга так как в них просто описывается логика открытия каких-либо страниц по заранее заготовленному сценарию при помощи «WindowController». Все что их отличает друг от друга, это: количество кнопок, страницы, которые открывают эти кнопки и заголовок, применяемый при смене страниц. При нажатии на кнопку, нам откроется калькулятор для выбранной нам задачи. Калькулятор будет содержать в себе кнопки, которые откроют нужные нам расчётные окна и кнопки «Назад» и «Вспомогательный калькулятор» (обозначен как «:::»).
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image14.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image14.png?raw=true)
 
 Изображение 14. Интерфейс калькулятора по теме задач «Сила Архимеда»
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image15.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image15.png?raw=true)
 
 Изображение 15. Интерфейс одного из расчётных окон (режим редактора)
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image16.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image16.png?raw=true)
 
 Изображение 16. Внутренний код расчётного окна
 
 Внутренние коды расчётных окон тоже не особо сильно отличаются друг от друга, они используют те же методы при первом открытии и немного разные команды-вызовы для решения задач. Вывоз «SetComboBox» осуществляется через класс «SIUnit_Controller», который хранит в себе обобщенную информацию о единицах измерения и команду-вызов для создания оконного элемента «ComboBox» с возможностью выбора нужной нам единицы. Данный класс объединяет в себе еще один класс «SIUnit» и список типа единиц «SIUnit_Type». «SIUnit» хранит в себе сами единицы измерения в виде списков и индексы-данные, которые указывают на основную единицу измерения (применяются при создания «ComboBox»). Кнопка «Рассчитать» всегда обращается к классу «CalculatorController», он хранит в себе большое количество скриптов для решения каких-либо задач и является самым большим скриптом в данном проекте (около 1500 строк).
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image17.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image17.png?raw=true)
 
 Изображение 17. Код класса «SIUnit_Controller»
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image18.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image18.png?raw=true)
 
 Изображение 18. Небольшой код класса «SIUnit»
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image19.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image19.png?raw=true)
 
 Изображение 19. Список типа единиц «SIUnit_Type»
 
 Как результат, при открытии расчётного окна применяются наши заранее записанные настройки страниц (элементам «ComboBox» присваиваются единицы измерения), мы можем вписать какие-либо данные из задачи и получить ответ вместе с формулой, также нам предоставляется возможность выбрать единицы измерения, исходя из условия задач.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image20.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image20.png?raw=true)
 
 Изображение 20. Пример работы расчётного окна
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image21.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image21.png?raw=true)
 
 Изображение 21. Возможность выбора единицы измерения
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image22.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image22.png?raw=true)
 
 Изображение 22. Скрипт для расчета «Силы Архимеда Fа»
 
 Если рассматривать сам скрипт, по которому происходит расчёт, то все выглядит так: сначала происходит конвертация вводимых данных, потом образуется формула решения задачи с нашими данными, происходит расчет и в конце происходит уже сам вывод ответа вместе с формулой. В случае если пользователь введет некорректные данные, произойдет вывод ошибки, но приложение продолжит свою работу.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image23.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image23.png?raw=true)
 
 Изображение 23. Вывод ошибки
 
 Все расчетные окна имеют схожий скрипт для решения задач, он работает по тому же алгоритму «конвертация данных — получение формулы — расчёт — ответ», но для каждой задачи этот алгоритм меняется внутри себя и по-прежнему остается в той же последовательности (иногда).
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image24.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image24.png?raw=true)
 
 Изображение 24. Пример кода для решения другой задачи
 
 Напоследок мы рассмотрим вспомогательный калькулятор, который мы всегда можем открыть если у нас выбрана какая-либо задача, в нем можно тоже проводить небольшие вычисления, которые, например мы сами не хотим проводить. Он содержит в себе самые простые сценарии для расчётов: сумма, разность, умножение, деление (дробь), возведение в степень, квадратный корень, Y-корень. Из него можно скопировать полученный ответ и вставить в основной калькулятор, либо перенести сам ответ вручную (по желанию пользователя). Если же пользователь потеряет само окно вспомогательного калькулятора он всегда может нажать кнопку «:::», которое само его, если оно было открыто.
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image25.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image25.png?raw=true)
 
 Изображение 25. Вспомогательный калькулятор
 
-https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image26.png
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image26.png?raw=true)
 
 Изображение 26. Пример работы одного из сценариев вспомогательного калькулятора
 
