@@ -2,7 +2,7 @@
 Первое что было создано изначально — это главное рабочее окно. Обычно оно создается автоматически, чтобы было с чем работать, но дальнейшая работа в нем требует доработки в виде кода. Приложение будет однооконным со множеством рабочих страниц, для этого понадобится «ContentControl» и небольшая настройка стиля.
 
 https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image1.png
-
+![Описание картинки](https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image1.png?raw=true)
 Изображение 1. Код главного окна
 
 https://github.com/ShillienGames/silomer-physics-calculator/blob/main/media/image2.png
